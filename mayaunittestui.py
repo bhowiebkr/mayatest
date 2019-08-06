@@ -33,7 +33,6 @@ logger = logging.getLogger(__name__)
 
 ICON_DIR = os.path.join(os.path.dirname(__file__), 'icons')
 
-
 _win = None
 
 

@@ -65,8 +65,10 @@ def get_module_tests(module_root, test_patteren='test_*.py'):
 
     test_suite = unittest.TestSuite()
     directories_added_to_path = []
+
     discovered_suite = unittest.TestLoader().discover(
         module_root, pattern=test_patteren)
+
     if discovered_suite.countTestCases():
         test_suite.addTests(discovered_suite)
 
