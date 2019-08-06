@@ -185,10 +185,7 @@ class MayaTestRunnerDialog(MayaQWidgetBaseMixin, QMainWindow):
 
     def refresh_tests(self):
         self.reset_rollback_importer()
-        # test_suite = mayaunittest.get_tests()
 
-        # path = os.path.abspath(
-        #     'E:/Get-Set-Games/Work/scripts/gsgAssetmanagerMaya')
         test_suite = mayaunittest.get_module_tests(
             module_root=self.module_line.path)
 

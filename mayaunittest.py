@@ -62,6 +62,7 @@ def run_tests(directories=None, test=None, test_suite=None):
 def get_module_tests(module_root, test_patteren='test_*.py'):
     """ Search for tests in this single module
     """
+
     test_suite = unittest.TestSuite()
     directories_added_to_path = []
     discovered_suite = unittest.TestLoader().discover(
