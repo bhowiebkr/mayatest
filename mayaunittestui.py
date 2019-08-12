@@ -111,25 +111,9 @@ class MayaTestRunnerDialog(MayaQWidgetBaseMixin, QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MayaTestRunnerDialog, self).__init__(*args, **kwargs)
         self.setAttribute(Qt.WA_DeleteOnClose)
-        self.setWindowTitle("Unit Test Runner")
+        self.setWindowTitle("Maya Unit Test Runner")
         self.resize(1000, 600)
         self.rollback_importer = RollbackImporter()
-
-        menubar = self.menuBar()
-        menu = menubar.addMenu("Settings")
-        action = menu.addAction("Buffer Output")
-        action.setToolTip("Only display output during a failed test.")
-        action.setCheckable(True)
-        action.setChecked(mayaunittest.Settings.buffer_output)
-        action.toggled.connect(mayaunittest.set_buffer_output)
-        action = menu.addAction("New Scene Between Test")
-        action.setToolTip("Creates a new scene file after each test.")
-        action.setCheckable(True)
-        action.setChecked(mayaunittest.Settings.file_new)
-        action.toggled.connect(mayaunittest.set_file_new)
-        menu = menubar.addMenu("Help")
-        action = menu.addAction("Documentation")
-        action.triggered.connect(documentation)
 
         toolbar = self.addToolBar("Tools")
         action = toolbar.addAction("Run All Tests")
@@ -168,12 +152,32 @@ class MayaTestRunnerDialog(MayaQWidgetBaseMixin, QMainWindow):
         self.setCentralWidget(widget)
         vbox = QVBoxLayout(widget)
 
+        # Settings
+        self.new_scene_checkbox = QCheckBox('New Scene Between Tests')
+        self.new_scene_checkbox.setChecked(mayaunittest.Settings.file_new)
+        self.new_scene_checkbox.toggled.connect(mayaunittest.set_file_new)
+        self.new_scene_checkbox.setToolTip(
+            "Creates a new scene file after each test.")
+
+        self.buffer_checkbox = QCheckBox('Buffer Output')
+        self.buffer_checkbox.setChecked(mayaunittest.Settings.buffer_output)
+        self.buffer_checkbox.toggled.connect(mayaunittest.set_buffer_output)
+        self.buffer_checkbox.setToolTip(
+            "Only display output during a failed test.")
+
+        settings_layout = QHBoxLayout()
+        settings_layout.addWidget(self.buffer_checkbox)
+        settings_layout.addWidget(self.new_scene_checkbox)
+
+        settings_layout.addStretch()
+
         splitter = QSplitter(orientation=Qt.Horizontal)
         self.test_view = QTreeView()
         self.test_view.setSelectionMode(QAbstractItemView.ExtendedSelection)
         splitter.addWidget(self.test_view)
         self.output_console = QTextEdit()
         self.output_console.setReadOnly(True)
+        vbox.addLayout(settings_layout)
         splitter.addWidget(self.output_console)
         vbox.addWidget(splitter)
         splitter.setStretchFactor(1, 4)
