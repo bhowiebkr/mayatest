@@ -209,7 +209,14 @@ class MayaTestRunnerDialog(MayaQWidgetBaseMixin, QMainWindow):
         """Callback method to run all the tests found in MAYA_MODULE_PATH."""
         self.reset_rollback_importer()
         test_suite = unittest.TestSuite()
-        mayaunittest.get_tests(test_suite=test_suite)
+
+        # Module test path
+        print('module test path: {}'.format(self.module_line.path))
+
+        # Get all the tests
+        test_suite = mayaunittest.get_module_tests(
+            module_root=self.module_line.path)
+
         self.output_console.clear()
         self.model.run_tests(self.stream, test_suite)
 
