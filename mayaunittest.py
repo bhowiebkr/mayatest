@@ -43,6 +43,10 @@ import maya.cmds as cmds
 CMT_TESTING_VAR = "CMT_UNITTEST"
 
 
+def new_scene():
+    cmds.file(f=True, new=True)
+
+
 def run_tests(directories=None, test=None, test_suite=None):
     """Run all the tests in the given paths.
 

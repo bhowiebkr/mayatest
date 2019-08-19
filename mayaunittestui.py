@@ -27,6 +27,7 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 import mayatest.mayaunittest as mayaunittest
+from mayatest.mayaunittest import new_scene
 from mayatest.FileLine import FileLine
 
 logger = logging.getLogger(__name__)
@@ -165,9 +166,13 @@ class MayaTestRunnerDialog(MayaQWidgetBaseMixin, QMainWindow):
         self.buffer_checkbox.setToolTip(
             "Only display output during a failed test.")
 
+        self.new_scene_btn = QPushButton('New Scene')
+        self.new_scene_btn.clicked.connect(new_scene)
+
         settings_layout = QHBoxLayout()
         settings_layout.addWidget(self.buffer_checkbox)
         settings_layout.addWidget(self.new_scene_checkbox)
+        settings_layout.addWidget(self.new_scene_btn)
 
         settings_layout.addStretch()
 
