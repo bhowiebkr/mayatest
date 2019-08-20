@@ -144,7 +144,7 @@ class Settings(object):
     # Specifies whether the standard output and standard error streams are buffered during the test run.
     # Output during a passing test is discarded. Output is echoed normally on test fail or error and is
     # added to the failure messages.
-    buffer_output = True
+    buffer_output = False
 
     # Controls whether we should do a file new between each test case
     file_new = True
