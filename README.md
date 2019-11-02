@@ -1,4 +1,4 @@
-# Maya Unit Test
+## Maya Unit Test
 
 Original work by [Chad Vernon](https://github.com/chadmv) as part of his CMT toolset: https://github.com/chadmv/cmt
 
